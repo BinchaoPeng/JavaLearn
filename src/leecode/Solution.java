@@ -209,19 +209,139 @@ class Solution {
          * 考虑点：使用正确长度的数组
          *
          */
-        if(head==null) {
+        if (head == null) {
             return new int[0];
         }
         LinkedList<Integer> ll = new LinkedList<>();
 
-        while (head.next!=null ){
+        while (head.next != null) {
             int val = head.val;
-            ll.add(0,val);
+            ll.add(0, val);
             head = head.next;
         }
         // 注意这里将List<Integer>转为了int[]
         return ll.stream().mapToInt(Integer::valueOf).toArray();
     }
+
+    /**
+     * 剑指 Offer 07. 重建二叉树
+     * <p>
+     * 输入某二叉树的前序遍历和中序遍历的结果，请构建该二叉树并返回其根节点。
+     * 假设输入的前序遍历和中序遍历的结果中都不含重复的数字。
+     */
+    public TreeNode buildTree(int[] preorder, int[] inorder) {
+        /**
+         *
+         * 第一步：复原二叉树【只要完成这一步就可以了，后面的是多余的】
+         * 前序第一个一定是当前根节点
+         * 不含重复数字，则中序和根节点将其划分为左右子树
+         * 当一直分下去，直到左右子树不再有子节点就不用再分了
+         *
+         * 第二步：层遍历二叉树
+         * 每次访问根节点，广度搜索,使用队列结构
+         * 按层访问时，空的用null填充{不知道怎么填充null}
+         *
+         * 第三步：去除第二步末尾收集到的多余的null
+         */
+
+        //第一步：得到二叉树
+        TreeNode tn = getTree(preorder, inorder);
+
+        printTreePreOrder(tn);
+        System.out.println("build over!");
+
+        //第二步：层遍历
+        ArrayList<Integer> re = new ArrayList<>();
+        LinkedList<TreeNode> queue = new LinkedList<>();
+        LinkedList<Integer> queueVal = new LinkedList<>();
+        queue.add(tn);
+        queueVal.add(tn.val);
+        while (queue.size() != 0) {
+            System.out.println(Arrays.toString(queueVal.toArray()));
+            tn = queue.remove();
+            queueVal.remove();
+
+            if (tn!=null){
+                re.add(tn.val);
+                if (tn.left != null) {
+                    queue.add(tn.left);
+                    queueVal.add(tn.left.val);
+                } else {
+                    queue.add(null);
+                    queueVal.add(null);
+                }
+                if (tn.right != null) {
+                    queue.add(tn.right);
+                    queueVal.add(tn.right.val);
+                } else {
+                    queue.add(null);
+                    queueVal.add(null);
+                }
+            }else {
+                re.add(null);
+            }
+        }
+        System.out.println(Arrays.toString(re.toArray()));
+
+        //去除最后一层的null，倒序遍历就行，碰到第一个非空数就完成
+        for (int i = re.size()-1; i >=0 ; i--) {
+            if (re.get(i)==null){
+                re.remove(i);
+            }else {
+                break;
+            }
+        }
+
+        System.out.println(Arrays.toString(re.toArray()));
+
+        return tn;
+    }
+
+    public void printTreePreOrder(TreeNode treeNode){
+        if(treeNode!=null){
+            System.out.println(treeNode.val);
+            if (treeNode.left!=null){
+                this.printTreePreOrder(treeNode.left);
+            }
+            if (treeNode.right!=null){
+                this.printTreePreOrder(treeNode.right);
+            }
+        }
+
+    }
+    public TreeNode getTree(int[] preorder, int[] inorder) {
+
+        int root = preorder[0];
+        int rootIdx = -1;
+        for (int i = 0; i < inorder.length; i++) {
+            if (root == inorder[i]) {
+                rootIdx = i;
+                break;
+            }
+        }
+        TreeNode tn = new TreeNode(root);
+
+        //根据rootIdx判断是否还有左右子树
+        if (rootIdx > 0) {
+            int[] leftTreeIn = new int[rootIdx];
+            int[] leftTreePre = new int[rootIdx];
+            System.arraycopy(inorder, 0, leftTreeIn, 0, rootIdx);
+            System.arraycopy(preorder, 1, leftTreePre, 0, rootIdx);
+            tn.left = this.getTree(leftTreePre, leftTreeIn);
+
+        }
+        if (rootIdx < inorder.length - 1) {
+            int[] rightTreeIn = new int[inorder.length - 1 - rootIdx];
+            int[] rightTreePre = new int[inorder.length - 1 - rootIdx];
+            System.arraycopy(inorder, rootIdx + 1, rightTreeIn, 0, inorder.length - 1 - rootIdx);
+            System.arraycopy(preorder, rootIdx + 1, rightTreePre, 0, inorder.length - 1 - rootIdx);
+            tn.right = this.getTree(rightTreePre,rightTreeIn);
+
+        }
+        return tn;
+
+    }
+
 
     public static void main(String[] args) {
         Solution s = new Solution();
@@ -237,10 +357,9 @@ class Solution {
 //
 //        boolean re = s.findNumberIn2DArray(matrix, 4);
 //        System.out.println(re);
-
-
-
-
+        int[] preoder = {3, 9, 20, 15, 7};
+        int[] inoder = {9, 3, 15, 20, 7};
+        s.buildTree(preoder, inoder);
 
     }
 }
