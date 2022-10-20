@@ -687,7 +687,52 @@ class Solution {
         return max[n];
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        return true;
+    }
 
+
+    public double myPow(double x, int n) {
+        // 使用二分相乘
+        // 3^13 = 3x (3^2)^6
+        //      = 3x (9^2)^3 = 3x 81^3
+        //      = 3x81 x(81^2)^1
+        // 也就是先取单，然后底平方，指数减半
+        // 以此类推
+        boolean flag = false;
+        if (n < 0) {
+            flag = true;
+            // 当n = -2147483648时，取绝对值，会超过整型范围
+            n = -n;
+            System.out.println(n);
+
+        }
+        if (n == 0) {
+            return 1;
+        } else if (n == 1) {
+            return flag ? 1 / x : x;
+        }
+        double result = 1;
+        double base = x;
+        System.out.println("result" + "\t\t" + "base" + "\t\t" + "n");
+        while (n > 1) {
+            if (n % 2 == 1) {
+                // 表示是奇数，出一个底，更新指数
+                result = result * base;
+                n = n - 1;
+
+            } else {
+                // 表示指数是偶数，底平方，指数减半
+                base = base * base;
+                n = n / 2;
+            }
+            System.out.println(result + "\t\t" + base + "\t\t" + n);
+        }
+        result = result * base;
+        return flag ? 1 / result : result;
+
+    }
 
 
     public static void main(String[] args) {
@@ -707,8 +752,8 @@ class Solution {
 //        int[] preoder = {3, 9, 20, 15, 7};
 //        int[] inoder = {9, 3, 15, 20, 7};
 //        s.buildTree(preoder, inoder);
-        System.out.println(s.fib(5));
-
+//        System.out.println(s.myPow(2.00000, -2147483648));
+        System.out.println((5 & 1) == 1 );
 
     }
 }

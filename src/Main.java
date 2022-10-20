@@ -11,6 +11,10 @@ public class Main {
         int[] ar = {1, 2, 3,};
         System.out.println(Arrays.toString(ar));
         System.out.println(ar[1]);
-
+        boolean[] a = new boolean[3];
+        for (boolean item :
+                a) {
+            System.out.println(item);
+        }
     }
 }
