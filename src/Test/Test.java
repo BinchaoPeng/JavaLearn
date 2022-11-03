@@ -1,9 +1,74 @@
 package Test;
 
-public class Test {
-    public static void main(String[] args) {
-        Integer_();
+import java.util.Arrays;
 
+public class Test {
+    int m;
+    public static void main(String[] args) {
+        int n = 1;
+        new Test().base(n);
+        System.out.println(n);
+    }
+
+    public void base(int n){
+        n = 2;
+        m = 3;
+    }
+
+
+    public static void sumSum() {
+        /**
+         * 1、while(++i）是先执行i+1，再进行判断，再执行循环体；
+         * 2、while(i++)是先判断，再执行循环体，再+1
+         * 循环结束后：while（++i）执行完后，i=0; while（i++）执行完后，i=1;
+         */
+        int[] nums = new int[]{0, 1, 2, 3, 4};
+        System.out.println(Arrays.toString(nums));
+        /**
+         * i=0; nums[0] ?> 2; i+1; num[1] ?> 2; i+1; num[2] ?> 2, no; i+1;
+         */
+        int a;
+        int i = 0;
+        while ((a = nums[i++]) < 2) {
+            System.out.println("i=" + i + ",a=" + a);
+        }
+        System.out.println(i);
+        /**
+         * i=0; i+1; nums[1] ?> 2; i+1; nums[2] ?> 2, no;
+         */
+        i = 0;
+        while ((a = nums[++i]) < 2) {
+            System.out.println("i=" + i + ",a=" + a);
+        }
+        System.out.println(i);
+        /**
+         * i=0; nums[0] ?> 2; i+1; num[1] ?> 2; i+1; num[2] ?> 2, no;
+         */
+        i = 0;
+        while ((a = nums[i]) < 2) {
+            i++;
+            System.out.println("i=" + i + ",a=" + a);
+        }
+        System.out.println(i);
+
+        System.out.println();
+
+        int j = 4;
+        while ((a = nums[j--]) > 2) {
+            System.out.println("j=" + j + ",a=" + a);
+        }
+        System.out.println(j);
+        j = 4;
+        while ((a = nums[--j]) > 2) {
+            System.out.println("j=" + j + ",a=" + a);
+        }
+        System.out.println(j);
+        j = 4;
+        while ((a = nums[j]) > 2) {
+            j--;
+            System.out.println("j=" + j + ",a=" + a);
+        }
+        System.out.println(j);
     }
 
     public static void Integer_() {
