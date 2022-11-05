@@ -7,6 +7,17 @@ public class Clazz extends AbsrtractClazz implements Interface_ {
     }
 
     @Override
+    protected String strFunc1(String s) {
+        return null;
+    }
+
+    @Override
+    String strFunc2(String s) {
+        return null;
+    }
+
+
+    @Override
     public String strFunc(String s, int a) {
         return super.strFunc(s, a);
     }
@@ -21,6 +32,16 @@ public class Clazz extends AbsrtractClazz implements Interface_ {
 
         return null;
 
+    }
+
+    @Override
+    public String getStr2(String str, int a) {
+        return null;
+    }
+
+    @Override
+    public String defFun() {
+        return Interface_.super.defFun();
     }
 
     public static void main(String[] args) {
