@@ -4,13 +4,37 @@ import java.util.Arrays;
 
 public class Test {
     int m;
+
     public static void main(String[] args) {
-        int n = 1;
-        new Test().base(n);
-        System.out.println(n);
+        StringSum();
     }
 
-    public void base(int n){
+    public static void StringSum(){
+        String a = "1";
+        for (int i = 0; i < 3; i++){
+            a += "j";
+        }
+        System.out.println(a);
+    }
+    public static void break_() {
+        /*
+        符合条件的话，直接跳出循环！！！
+         */
+        int i = 10;
+        while (i > 0) {
+            i--;
+            if (i < 3) {
+                System.out.println("if.");
+                if (i < 3) {
+                    break;
+                }
+                System.out.println("IF..");
+            }
+            System.out.println("going...");
+        }
+    }
+
+    public void base(int n) {
         n = 2;
         m = 3;
     }

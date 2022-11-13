@@ -119,7 +119,7 @@ public class List_ {
         deque.push("push");
         deque.push("push");
         deque.push("push");
-        deque.pop();
+        Object pop = deque.pop();
         System.out.println(Arrays.toString(deque.toArray()));
     }
 

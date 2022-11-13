@@ -8,6 +8,9 @@ import java.util.List;
 public class String_ {
     public static void main(String[] args) {
         strOperations();
+        System.out.print("a ");
+        System.out.print("b ");
+        System.out.print("c \n");
 
     }
 

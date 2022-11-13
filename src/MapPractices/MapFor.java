@@ -10,6 +10,10 @@ public class MapFor {
         map.put("age", 3);
         map.put("price", 6.6);
 
+        for (Object en: map.entrySet()) {
+            Map.Entry entry = (Map.Entry) en;
+        }
+
         Set entrySet = map.entrySet();
         Collection values = map.values();
         Set keySet = map.keySet();
