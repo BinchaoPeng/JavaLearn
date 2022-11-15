@@ -15,6 +15,7 @@ public class BinarySearch {
         int start = 0, end = A.length - 1;
         while (start + 1 < end) {
             int mid = start + (end - start) / 2;
+            System.out.println("s:("+start+", "+A[start]+") e:("+end+", "+A[end]+") m:("+mid+", "+A[mid]+")");
             if (A[mid] == target) {
 //                // 找 first
 //                end = mid;
@@ -26,8 +27,10 @@ public class BinarySearch {
             } else {
                 end = mid - 1;
             }
+
         }
         // 循环结束，结果可能在start中，也可能在end中，看找first还是last
+        System.out.println("s:("+start+", "+A[start]+") e:("+end+", "+A[end]+")");
         if (A[end] == target) {
             return end;
         }

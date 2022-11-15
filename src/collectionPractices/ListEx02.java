@@ -1,8 +1,7 @@
-package CollectionPractices;
+package collectionPractices;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Vector;
 
 /**
  * 使用List的实现类添加三本图书，并遍历，打印如下效果名称:xXX

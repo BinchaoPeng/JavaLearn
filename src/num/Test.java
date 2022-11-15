@@ -2,7 +2,17 @@ package num;
 
 public class Test {
     public static void main(String[] args) {
-        boxing();
+        equal_();
+    }
+
+    static void equal_() {
+        System.out.println(41.1 == 41.01);
+        System.out.println(41 == 41.0);
+        System.out.println(41 == 41.00);
+        float a = 41.2f;
+        float b = 41.2f;
+        System.out.println(a==b);
+        System.out.println(4.2 == 4.2);
     }
 
     static void boxing() {

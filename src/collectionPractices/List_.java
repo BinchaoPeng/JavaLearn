@@ -1,4 +1,4 @@
-package CollectionPractices;
+package collectionPractices;
 
 import java.util.*;
 
@@ -83,6 +83,7 @@ public class List_ {
         System.out.println(peek);
         queue.poll();  // 出队操作 poll 轮询
         queue.add("2");
+
         System.out.println(Arrays.toString(queue.toArray()));
     }
 
