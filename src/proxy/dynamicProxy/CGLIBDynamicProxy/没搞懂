@@ -1,0 +1,6 @@
+从Main中的使用来看
+不管是JdkProxy，还是CGLIBProxy，都会用到服务实现类作为参数，并且使用service对象引用接收（jdk中是接口，cglib中是类）
+
+从隔离上看，代理的目的是调用方不直接调用目标对象，通过代理人从中间处理
+jdk的serviceImpl和cglib的service类，就是目标对象
+invoke和intercept方法都没有被显示调用，应该是被封装了，需要看源码
