@@ -14,7 +14,9 @@ import java.lang.reflect.Method;
  * Class类是一个泛型类
  */
 public class Reflect_ {
-    public static void main(String[] args) throws ClassNotFoundException, InstantiationException, IllegalAccessException, NoSuchFieldException, NoSuchMethodException {
+    public static void main(String[] args) throws ClassNotFoundException,
+            InstantiationException, IllegalAccessException,
+            NoSuchFieldException, NoSuchMethodException {
         System.out.println("通过类的路径获取类");
         Class clazz = Class.forName("pkgB.Child");
         reflect(clazz);
