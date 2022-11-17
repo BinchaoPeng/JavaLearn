@@ -2,17 +2,34 @@ package num;
 
 public class Test {
     public static void main(String[] args) {
-        equal_();
+        floatEqual();
     }
 
-    static void equal_() {
-        System.out.println(41.1 == 41.01);
-        System.out.println(41 == 41.0);
-        System.out.println(41 == 41.00);
+    static void floatEqual() {
+        /**
+         * 浮点数之间的等值判断，基本数据类型不能用 == 来比较，包装数据类型不能用 equals 来判断。
+         * 解决办法：
+         *      采用和 误差范围 作比较
+         *      使用BigDecimal类
+         */
+        System.out.println(41.1 == 41.01); //false
+        System.out.println(41.00000000001d == 41.00000000001d);  //true
+        System.out.println(41 == 41.00); // true
         float a = 41.2f;
         float b = 41.2f;
-        System.out.println(a==b);
-        System.out.println(4.2 == 4.2);
+        System.out.println(a == b); //true
+        System.out.println(4.2 == 4.2); //true
+        /**
+         * 浮点数运算是不准确的
+         * 会有精度丢失的风险
+         */
+        float m = 5.2f;
+        float n = 5.1f;
+        double re = m - n;
+        System.out.println(re); // 0.09999990463256836
+        System.out.println(re == 0.1);// false!!!
+        System.out.println((0.3 - 0.2) == (0.4 - 0.3)); // false
+
     }
 
     static void boxing() {
