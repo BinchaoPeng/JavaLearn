@@ -20,14 +20,14 @@ public class CombinationSum {
         }
     }
 
-    public static void main(String[] args) {
-        int[] nums = new int[]{2, 3, 6, 7};
-        int target = 7;
-        List<List<Integer>> lists = new CombinationSum().combinationSum(nums, target);
-        System.out.println(Arrays.toString(lists.toArray()));
-    }
-
-    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+    /**
+     * 普通方法
+     *
+     * @param candidates
+     * @param target
+     * @return
+     */
+    public List<List<Integer>> combinationSum1(int[] candidates, int target) {
         Arrays.sort(candidates);
         List<List<Integer>> res = new ArrayList<>();
         Queue<Note> queue = new LinkedList<>();
@@ -85,8 +85,35 @@ public class CombinationSum {
 
     }
 
-    public void dfs(int[] candidates, int target, List<List<Integer>> res) {
+    public static void main(String[] args) {
+        int[] nums = new int[]{2, 3, 6, 7};
+        int target = 7;
+        List<List<Integer>> lists = new CombinationSum().combinationSum(nums, target);
+        System.out.println(Arrays.toString(lists.toArray()));
+    }
 
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+        Arrays.sort(candidates);
+        List<List<Integer>> res = new ArrayList<>();
+        backTrace(candidates, target, 0, 0, new ArrayList<>(), res);
+        return res;
+
+    }
+
+    public void backTrace(int[] candidates, int target, int targetCur, int start, List<Integer> curList, List<List<Integer>> res) {
+        if (targetCur == target) {
+            res.add(new ArrayList<>(curList));
+            return;
+        }
+        for (int i = start; i < candidates.length; i++) {
+            targetCur += candidates[i];
+            if (targetCur <= target) {
+                curList.add(candidates[i]);
+                backTrace(candidates, target, targetCur, i, curList, res);
+                curList.remove(curList.size() - 1);
+                targetCur -= candidates[i];
+            }
+        }
 
     }
 }

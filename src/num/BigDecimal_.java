@@ -66,11 +66,14 @@ public class BigDecimal_ {
     }
 
     public static void newObject() {
+        System.out.println("创建一个大数对象");
         // 推荐使用
         // BigDecimal(String val)
         // BigDecimal.valueOf(double val)
         BigDecimal bigDecimal = new BigDecimal("123.654789");
         BigDecimal bigDecimal1 = BigDecimal.valueOf(1.25634875662);
+        System.out.println(bigDecimal);  // 123.654789
+        System.out.println(bigDecimal1); // 1.25634875662
         // 这个构造方法不要用，会精度失真
         // 1.3653999999999999470645661858725361526012420654296875
         BigDecimal bigDecimal2 = new BigDecimal(1.3654);

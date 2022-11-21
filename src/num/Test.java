@@ -2,8 +2,36 @@ package num;
 
 public class Test {
     public static void main(String[] args) {
-        floatEqual();
+        IntObj1();
     }
+
+
+    static void IntObj() {
+        Integer integer = Integer.valueOf(1);
+        Integer integer1 = new Integer(1);
+        int integer2 = 1;
+        Integer integer3 = 1;
+        System.out.println(integer == integer1); // false
+        System.out.println(integer == integer2); // true
+        System.out.println(integer == integer3); // true
+        System.out.println(integer1 == integer2);// true
+        System.out.println(integer1 == integer3);// false
+        System.out.println(integer2 == integer3); // true
+    }
+
+    static void IntObj1() {
+        Integer integer = Integer.valueOf(130);
+        Integer integer1 = new Integer(130);
+        int integer2 = 130;
+        Integer integer3 = 130;
+        System.out.println(integer == integer1); // false
+        System.out.println(integer == integer2); // true
+        System.out.println(integer == integer3); // true --> false 超过缓存范围，所以new一个
+        System.out.println(integer1 == integer2);// true
+        System.out.println(integer1 == integer3);// false
+        System.out.println(integer2 == integer3);// true
+    }
+
 
     static void floatEqual() {
         /**
