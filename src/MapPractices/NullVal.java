@@ -13,6 +13,7 @@ public class NullVal {
         hashMap.put(null, null);
 
         /**
+         * hashtable <过时了，不推荐使用>
          * value和key 都不能为空
          * key不为空 是因为: line 466, int hash = key.hashCode();
          */

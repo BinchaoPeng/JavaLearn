@@ -7,10 +7,12 @@ import java.util.List;
 @SuppressWarnings("all")
 public class String_ {
     public static void main(String[] args) {
-        strOperations();
-        System.out.print("a ");
-        System.out.print("b ");
-        System.out.print("c \n");
+        /**
+         * hashcode：根据字符串内容决定，字符串要么是“3”，要么是“33”，所以只有两种hashcode
+         *
+         */
+        System.out.println("============字符串equals");
+        strEquals();
 
     }
 
@@ -49,20 +51,25 @@ public class String_ {
         String str2 = new String("3") + new String("3");
         String str3 = "33";
         String str4 = "3";
-
-        System.out.println(str == str1);  //false 一个指向常量池，一个指向对象实例，这个放在堆里面
-        System.out.println(str.equals(str1));
-        System.out.println(str2 == str3);
-        System.out.println(str2.equals(str3));
-        System.out.println(str == str4); //true  都指向常量池的那个字符串常量
-        System.out.println(str1 == str4);
+        String str6 = str + str4;
+        System.out.println("====hashcode>>>");
         System.out.println(str.hashCode());
         System.out.println(str1.hashCode());
+        System.out.println(str5.hashCode());
         System.out.println(str4.hashCode());
-        System.out.println(new String("3").hashCode());
-        System.out.println(new String("3").hashCode());
         System.out.println(str2.hashCode());
         System.out.println(str3.hashCode());
+        System.out.println(str6.hashCode());
+        System.out.println(new String("3").hashCode());
+        System.out.println(new String("3").hashCode());
+        System.out.println("====equals>>>");
+        System.out.println(str.equals(str1));
+        System.out.println(str2.equals(str3));
+        System.out.println("====\"==\">>>");
+        System.out.println(str == str1);  //false 一个指向常量池，一个指向对象实例，这个放在堆里面
+        System.out.println(str2 == str3);
+        System.out.println(str == str4); //true  都指向常量池的那个字符串常量
+        System.out.println(str1 == str4);
         System.out.println(str1 == str5); // false
     }
 
