@@ -1,4 +1,4 @@
-package MapPractices;
+package map;
 
 import java.io.*;
 import java.util.Map;

@@ -1,4 +1,4 @@
-package MapPractices;
+package map;
 
 public class MapSourceCodeTest {
     public static void main(String[] args) {

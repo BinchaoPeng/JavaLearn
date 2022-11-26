@@ -1,6 +1,5 @@
-package MapPractices;
+package map;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
