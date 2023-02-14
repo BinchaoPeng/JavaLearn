@@ -1,11 +1,16 @@
-package muti;
+package mutiThread;
 
 import java.util.concurrent.Callable;
-import java.util.concurrent.Executors;
 
 public class Runable_ implements Runnable {
 
     public static void main(String[] args) {
+//        new Runnable(){
+//            @Override
+//            public void run() {
+//                return;
+//            }
+//        };
         Thread thread1 = new Thread(new Runable_());
         Thread thread2 = new Thread(new Runable_());
         Thread thread3 = new Thread(new Runable_());

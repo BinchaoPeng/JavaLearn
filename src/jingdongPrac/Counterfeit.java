@@ -13,15 +13,23 @@ public class Counterfeit {
         for (int i = 0; i < n; i++) {
             nums[i] = scanner.nextInt();
         }
-        String l = scanner.nextLine();
-        System.out.println(l);
         System.out.println(Arrays.toString(nums));
-        counterfeit(nums, n);
+        int counterfeit = counterfeit(nums, n);
+        System.out.println(counterfeit);
 
 
     }
 
     static int counterfeit(int[] nums, int n) {
+        if (n == 1) {
+            return 0;
+        }
+        Arrays.sort(nums);
+        for (int i = n - 1; i >= 0; i--) {
+            if (nums[i] > nums[i - 1]) {
+                return i;
+            }
+        }
         return 0;
     }
 }

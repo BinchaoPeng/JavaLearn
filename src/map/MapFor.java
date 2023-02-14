@@ -1,6 +1,7 @@
 package map;
 
 import java.util.*;
+import java.util.function.BiConsumer;
 
 public class MapFor {
     public static void main(String[] args) {
@@ -10,7 +11,7 @@ public class MapFor {
         map.put("age", 3);
         map.put("price", 6.6);
 
-        for (Object en: map.entrySet()) {
+        for (Object en : map.entrySet()) {
             Map.Entry entry = (Map.Entry) en;
         }
 
@@ -49,6 +50,15 @@ public class MapFor {
             Map.Entry m = (Map.Entry) entry;
             System.out.println(m.getKey() + ": " + m.getValue());
         }
+
+        System.out.println("使用函数式接口，lambda表达式遍历map");
+        map.forEach(new BiConsumer() {
+            @Override
+            public void accept(Object o, Object o2) {
+                System.out.println(o + "," + o2);
+            }
+        });
+        map.forEach((key, val) -> System.out.println(key + ", " + val));
 
     }
 }
