@@ -1,0 +1,2 @@
+用于调试程序，默认是关闭的，也就是会忽略assert语句
+assert 断言某个值为true，否则抛出AssertError
