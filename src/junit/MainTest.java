@@ -8,8 +8,10 @@ import static org.junit.jupiter.api.Assertions.*;
 public class MainTest {
     @Test
     void testAdd() {
-        assertEquals(10, JunitDemo.add(5, 5));
-        assertEquals(11, JunitDemo.add(5, 5));
-        assertEquals(12, JunitDemo.add(5, 5));
+        assertEquals(11, JunitDemo.add(5, 5),"ddd");
+
+//        assertEquals(11, JunitDemo.add(5, 5));
+//        assertEquals(12, JunitDemo.add(5, 5));
+
     }
 }
