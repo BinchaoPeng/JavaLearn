@@ -42,6 +42,7 @@ public class DaemonDemo {
         thread.setDaemon(true); // 设置为了守护进程，没有非守护进程时，jvm就退出了
         thread.start();
         Thread thread1 = new TaskThread();
+
         thread1.start();
         try {
             Thread.sleep(300);
