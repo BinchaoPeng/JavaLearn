@@ -8,17 +8,12 @@ import java.util.Scanner;
 
 /**
  * 接收的时候，好像复用不了数据包对象，他的getLength不会自动更新
- * <p>
- * 在客户端发送数据包之前，数据包是没有记录getAddress和getAddress的
- * 只有DatagramSocket ds中才包含此类信息
  */
-public class Client {
+public class Client1 {
     public static void main(String[] args) {
         try {
             DatagramSocket ds = new DatagramSocket();
-            // 意思是后续接收UDP包时，等待时间最多不会超过5秒，否则在没有收到UDP包时，客户端会无限等待下去。
-            // 这一点和服务器端不一样，服务器端可以无限等待，因为它本来就被设计成长时间运行。
-            ds.setSoTimeout(5000);
+            ds.setSoTimeout(1000); // 一秒没响应，客户端就断开
             // connect
             ds.connect(InetAddress.getByName("127.0.0.1"), 6666);
 
