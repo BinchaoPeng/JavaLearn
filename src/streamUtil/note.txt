@@ -1,0 +1,83 @@
+[TOC]
+
+# Stream概述
+总结一下Stream的特点：它可以“存储”有限个或无限个元素。
+这里的存储打了个引号，是因为元素有可能已经全部存储在内存中，也有可能是根据需要实时计算出来的。
+另一个特点是，一个Stream可以轻易地转换为另一个Stream，而不是修改原Stream本身。
+最后，真正的计算通常发生在最后结果的获取，也就是惰性计算。
+惰性计算的特点是：一个Stream转换为另一个Stream时，实际上只存储了转换规则，并没有任何计算发生。
+
+通常把Stream的操作写成链式操作，代码更简洁
+
+Stream API的基本用法就是：创建一个Stream，然后做若干次转换，最后调用一个求值方法获取真正计算的结果
+
+Stream API的特点是：
+    Stream API提供了一套新的流式处理的抽象序列；
+    Stream API支持函数式编程和链式操作；
+    Stream可以表示无限序列，并且大多数情况下是惰性求值的。
+
+# 创建Stream
+元素都是事先固定的，具有有限个元素：
+    创建Stream最简单的方式是直接用Stream.of()静态方法，传入可变参数即创建了一个能输出确定元素的Stream
+        Stream<String> stream = Stream.of("A", "B", "C", "D");
+    把数组变成Stream使用Arrays.stream()方法。对于Collection（List、Set、Queue等），直接调用stream()方法就可以获得Stream
+        Stream<String> stream1 = Arrays.stream(new String[] { "A", "B", "C" });
+        Stream<String> stream2 = List.of("X", "Y", "Z").stream();
+
+元素都是实时计算出来的，这种Stream保存的不是元素，而是算法，它可以用来表示无限序列：
+    通过Stream.generate()方法，它需要传入一个Supplier对象： Stream.generate(Supplier<T> sp);
+        对于无限序列，如果直接调用forEach()或者count()这些最终求值操作，会进入死循环，
+        因为永远无法计算完这个序列，所以正确的方法是先把无限序列变成有限序列
+
+创建Stream的第三种方法是通过一些API提供的接口，直接获得Stream：
+    Files.lines(Paths.get("/path/to/file.txt"))
+    正则表达式的Pattern对象有一个splitAsStream()方法，可以直接把一个长字符串分割成Stream序列而不是数组
+    Java标准库提供了IntStream、LongStream和DoubleStream这三种使用基本类型的Stream，
+        它们的使用方法和范型Stream没有大的区别，设计这三个Stream的目的是提高运行效率
+        IntStream is = Arrays.stream(new int[] { 1, 2, 3 });
+
+# map()
+Stream.map()是Stream最常用的一个转换方法，它把一个Stream转换为另一个Stream。
+map()方法接收的对象是Function接口对象，它定义了一个apply()方法，负责把一个T类型转换成R类型:
+```java
+@FunctionalInterface
+public interface Function<T, R> {
+    // 将T类型转换为R:
+    R apply(T t);
+}
+```
+再结合lambda表达式，甚至方法引用，就可以实现元素的转换
+
+# filter()
+所谓filter()操作，就是对一个Stream的所有元素一一进行测试，不满足条件的就被“滤掉”了，剩下的满足条件的元素就构成了一个新的Stream。
+filter()方法接收的对象是Predicate接口对象，它定义了一个test()方法，负责判断元素是否符合条件：
+```java
+@FunctionalInterface
+public interface Predicate<T> {
+    // 判断元素t是否符合条件:
+    boolean test(T t);
+}
+```
+
+# reduce()
+map()和filter()都是Stream的转换方法，
+而Stream.reduce()则是Stream的一个聚合方法，它可以把一个Stream的所有元素按照聚合函数聚合成一个结果。
+reduce()方法传入的对象是BinaryOperator接口，它定义了一个apply()方法，负责把上次累加的结果和本次的元素 进行运算，并返回累加的结果：
+```java
+@FunctionalInterface
+public interface BinaryOperator<T> {
+    // Bi操作：两个输入，一个输出
+    T apply(T t, T u);
+}
+```
+
+如果去掉初始值，我们会得到一个Optional<Integer>,这是因为Stream的元素有可能是0个，这样就没法调用reduce()的聚合函数了，
+因此返回Optional对象，需要进一步判断结果是否存在。
+
+# 输出集合
+对Stream来说可以分为两类，
+一类是转换操作，即把一个Stream转换为另一个Stream，例如map()和filter()，........................不会立刻计算
+另一类是聚合操作，即对Stream的每个元素进行计算，得到一个确定的结果，例如reduce()。................会立刻执行计算
+对一个Stream做聚合计算后，结果就不是一个Stream，而是一个==其他的Java对象==。
+
+
