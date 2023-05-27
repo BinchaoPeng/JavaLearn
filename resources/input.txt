@@ -1,2 +1,0 @@
-这是第一行，全是中文的！
-hello, it is the second row!
